@@ -1,13 +1,14 @@
 import 'package:news_app/core/constants/imports.dart';
 
 class PageIndicatorWidget extends StatelessWidget {
-  const PageIndicatorWidget({required this.currentPage, super.key});
-  final ValueNotifier<int> currentPage;
+  const PageIndicatorWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.introductionCubit;
+
     return ValueListenableBuilder(
-      valueListenable: currentPage,
+      valueListenable: cubit.currentPage,
       builder: (context, value, child) {
         return Row(
           children: List.generate(

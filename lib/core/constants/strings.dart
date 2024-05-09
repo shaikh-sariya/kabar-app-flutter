@@ -22,6 +22,8 @@ class AppStrings {
 
   static String get next => 'Next';
 
+  static String get getStarted => 'Get Started';
+
   static String get hello => 'Hello';
 
   static String get again => 'Again!';

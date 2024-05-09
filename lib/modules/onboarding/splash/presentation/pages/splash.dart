@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage>
     );
     _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
     _controller.forward().then((_) {
-      context.goNamed(PAGES.login.screenName);
+      context.goNamed(PAGES.introduction.screenName);
     });
   }
 

@@ -1,6 +1,10 @@
 part of 'introduction_cubit.dart';
 
-@immutable
-abstract class IntroductionState {}
+sealed class IntroductionState extends Equatable {
+  const IntroductionState();
+}
 
-class IntroductionInitial extends IntroductionState {}
+final class IntroductionInitial extends IntroductionState {
+  @override
+  List<Object> get props => [];
+}

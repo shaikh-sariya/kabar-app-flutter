@@ -35,6 +35,7 @@ class HeadlinesWidget extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                   top: 0.025.sh,
+                  bottom: 0.01.sh,
                 ),
                 child: Text(
                   title!,

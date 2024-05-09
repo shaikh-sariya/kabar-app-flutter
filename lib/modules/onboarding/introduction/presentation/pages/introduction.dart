@@ -8,24 +8,28 @@ class IntroductionPage extends StatefulWidget {
 }
 
 class _IntroductionPageState extends State<IntroductionPage> {
-  final currentPage = ValueNotifier<int>(0);
-  final controller = PageController();
+  @override
+  void didChangeDependencies() {
+    context.introductionCubit.controller = PageController();
+    super.didChangeDependencies();
+  }
 
   @override
   void dispose() {
-    controller.dispose();
+    context.introductionCubit.controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.introductionCubit;
     return Scaffold(
       body: Column(
         children: [
           Expanded(
             child: PageView.builder(
-              controller: controller,
-              // physics: const NeverScrollableScrollPhysics(),
+              controller: cubit.controller,
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 3,
               itemBuilder: (context, index) {
                 return HeadlinesWidget(index: index);
@@ -36,38 +40,68 @@ class _IntroductionPageState extends State<IntroductionPage> {
             height: 0.1.sh,
             margin: EdgeInsets.symmetric(horizontal: 0.05.sw),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                PageIndicatorWidget(currentPage: currentPage),
-                const SizedBox(
-                  width: 140,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    AppStrings.back,
-                    style: const TextStyle(
-                      color: Color(0xFFB0B3B8),
-                      fontSize: 18,
+                const PageIndicatorWidget(),
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        if (cubit.currentPage.value != 0) {
+                          cubit.currentPage.value -= 1;
+                          cubit.controller?.animateToPage(
+                            cubit.currentPage.value,
+                            duration: const Duration(milliseconds: 300),
+                            curve: Curves.easeIn,
+                          );
+                        }
+                      },
+                      child: Text(
+                        AppStrings.back,
+                        style: const TextStyle(
+                          color: Color(0xFFB0B3B8),
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                FilledButton(
-                  onPressed: () {},
-                  style: FilledButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 13,
+                    const SizedBox(
+                      width: 10,
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6),
+                    ValueListenableBuilder(
+                      valueListenable: cubit.currentPage,
+                      builder: (context, value, child) {
+                        return FilledButton(
+                          onPressed: () {
+                            if (cubit.currentPage.value != 2) {
+                              cubit.currentPage.value += 1;
+                              cubit.controller?.animateToPage(
+                                cubit.currentPage.value,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn,
+                              );
+                            } else {
+                              context.goNamed(PAGES.login.screenName);
+                            }
+                          },
+                          style: FilledButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 24,
+                              vertical: 13,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            backgroundColor: AppColors.primary,
+                          ),
+                          child: Text(
+                            value == 2
+                                ? AppStrings.getStarted
+                                : AppStrings.next,
+                          ),
+                        );
+                      },
                     ),
-                    backgroundColor: AppColors.primary,
-                  ),
-                  child: Text(AppStrings.next),
+                  ],
                 ),
               ],
             ),
