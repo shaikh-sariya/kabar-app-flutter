@@ -28,26 +28,31 @@ class AppStrings {
 
   static String get again => 'Again!';
 
-  static String get welcomeBackMessage => "Welcome back, you've been missed!";
+  static String get welcomeBackMessage => "Welcome back, you've\nbeen missed!";
 
-  static String get userName => 'username';
+  static String get userName => 'Username';
 
-  static String get star1 => '*';
+  static String get enterUsername => 'Enter Username';
 
-  static String get passWord => 'password';
+  static String get asterisk => '*';
 
-  static String get star2 => '*';
+  static String get password => 'Password';
 
-  static String get forgotPassword => 'Forgot the password?';
+  static String get enterPassword => 'Enter Password';
 
-  static String get forgotPasswordButtonPressed =>
-      'Forgot Password Button Pressed';
+  static String get forgotPassword => 'Forgot password?';
 
   static String get rememberMe => 'Remember me';
 
   static String get login => 'Login';
 
-  static String get loginButtonPS => 'Login Button Pressed';
-
   static String get orContinueWith => 'or continue with';
+
+  static String get facebook => 'Facebook';
+
+  static String get google => 'Google';
+
+  static String get noAccount => "Don't have an account?";
+
+  static String get register => 'Register';
 }

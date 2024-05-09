@@ -16,4 +16,12 @@ class AppColors {
   static const Color fillbox = Color(0x00FFFFFF);
 
   static const Color white = Color(0xffFFFFFF);
+
+  static const Color gray = Color(0xff4e4b66);
+
+  static const Color lightgray = Color(0xFFA0A3BD);
+
+  static const Color mandatory = Color(0xFFC30052);
+
+  static const Color secondaryButton = Color(0xFFEEF1F4);
 }

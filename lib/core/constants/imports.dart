@@ -13,6 +13,8 @@ export 'package:news_app/core/extensions/context_extension.dart';
 export 'package:news_app/core/theme/theme.dart';
 export 'package:news_app/modules/authentication/login/presentation/cubits/login_cubit.dart';
 export 'package:news_app/modules/authentication/login/presentation/pages/login.dart';
+export 'package:news_app/modules/common/bottom_navigation_bar/cubit/bottom_navigation_bar_cubit.dart';
+export 'package:news_app/modules/common/bottom_navigation_bar/pages/bottom_navigation_bar.dart';
 export 'package:news_app/modules/onboarding/introduction/presentation/cubits/introduction_cubit.dart';
 export 'package:news_app/modules/onboarding/introduction/presentation/pages/introduction.dart';
 export 'package:news_app/modules/onboarding/introduction/presentation/widgets/headlines.dart';
@@ -22,3 +24,6 @@ export 'package:news_app/modules/onboarding/splash/presentation/pages/splash.dar
 export 'package:news_app/routes/route_observer.dart';
 export 'package:news_app/routes/router.dart';
 export 'package:news_app/routes/routes.dart';
+export 'package:equatable/equatable.dart';
+export 'package:news_app/core/constants/widgets.dart';
+export 'package:news_app/core/enums/text_field.dart';
