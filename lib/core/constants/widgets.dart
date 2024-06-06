@@ -115,11 +115,11 @@ class AppWidgets {
 
     switch (type) {
       case SocialPlatformType.facebook:
-        title = AppImages.facebook;
-        assetName = '  ${AppStrings.facebook}';
+        assetName = AppImages.facebook;
+        title = '  ${AppStrings.facebook}';
       case SocialPlatformType.google:
-        title = AppImages.google;
-        assetName = '  ${AppStrings.google}';
+        assetName = AppImages.google;
+        title = '  ${AppStrings.google}';
     }
     return FilledButton(
       onPressed: () {},
