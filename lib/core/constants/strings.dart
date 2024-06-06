@@ -55,4 +55,12 @@ class AppStrings {
   static String get noAccount => "Don't have an account?";
 
   static String get register => 'Register';
+
+  static String get search => 'search';
+
+  static String get trending => 'Trending';
+
+  static String get seeAll => 'See all';
+
+  static String get required => 'Required*';
 }

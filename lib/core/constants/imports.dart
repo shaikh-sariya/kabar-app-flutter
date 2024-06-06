@@ -1,5 +1,7 @@
 export 'package:bloc/bloc.dart';
+export 'package:equatable/equatable.dart';
 export 'package:flutter/material.dart';
+export 'package:flutter/services.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_svg/flutter_svg.dart';
@@ -7,8 +9,10 @@ export 'package:go_router/go_router.dart';
 export 'package:news_app/core/constants/colors.dart';
 export 'package:news_app/core/constants/images.dart';
 export 'package:news_app/core/constants/strings.dart';
+export 'package:news_app/core/constants/widgets.dart';
 export 'package:news_app/core/debug/bloc_observer.dart';
 export 'package:news_app/core/enums/pages.dart';
+export 'package:news_app/core/enums/text_field.dart';
 export 'package:news_app/core/extensions/context_extension.dart';
 export 'package:news_app/core/theme/theme.dart';
 export 'package:news_app/modules/authentication/login/presentation/cubits/login_cubit.dart';
@@ -24,6 +28,3 @@ export 'package:news_app/modules/onboarding/splash/presentation/pages/splash.dar
 export 'package:news_app/routes/route_observer.dart';
 export 'package:news_app/routes/router.dart';
 export 'package:news_app/routes/routes.dart';
-export 'package:equatable/equatable.dart';
-export 'package:news_app/core/constants/widgets.dart';
-export 'package:news_app/core/enums/text_field.dart';

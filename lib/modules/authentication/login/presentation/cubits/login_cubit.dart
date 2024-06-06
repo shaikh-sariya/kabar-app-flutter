@@ -9,6 +9,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final showPassword = ValueNotifier<bool>(false);
+  final obscureText = ValueNotifier<bool>(true);
   final rememberMe = ValueNotifier<bool>(false);
+
+  final formKey = GlobalKey<FormState>();
 }

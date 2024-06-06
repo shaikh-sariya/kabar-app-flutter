@@ -12,14 +12,36 @@ class AppWidgets {
     final textTheme = context.theme.textTheme;
     String text;
     String hintText;
+    List<TextInputFormatter>? inputFormatters;
+    String? Function(String?)? validator;
 
     switch (type) {
       case TextFieldType.username:
         text = AppStrings.userName;
         hintText = AppStrings.enterUsername;
+        inputFormatters = [
+          FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9_]+')),
+        ];
+        validator = (value) {
+          if ((value ?? '').isEmpty) {
+            return AppStrings.required;
+          }
+          return null;
+        };
       case TextFieldType.password:
         text = AppStrings.password;
         hintText = AppStrings.enterPassword;
+        inputFormatters = [
+          FilteringTextInputFormatter.allow(
+            RegExp(r'[a-zA-Z0-9!@#$%^&*()_+=-]+'),
+          ),
+        ];
+        validator = (value) {
+          if ((value ?? '').isEmpty) {
+            return AppStrings.required;
+          }
+          return null;
+        };
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,6 +66,8 @@ class AppWidgets {
               padding: EdgeInsets.only(top: 0.01.sh),
               child: TextFormField(
                 controller: controller,
+                inputFormatters: inputFormatters,
+                validator: validator,
                 onTapOutside: (value) {
                   FocusScope.of(context).unfocus();
                 },
