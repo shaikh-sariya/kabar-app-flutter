@@ -10,4 +10,6 @@ extension ContextExtension on BuildContext {
   IntroductionCubit get introductionCubit => read<IntroductionCubit>();
 
   LoginCubit get loginCubit => read<LoginCubit>();
+
+  RegisterCubit get registerCubit => read<RegisterCubit>();
 }

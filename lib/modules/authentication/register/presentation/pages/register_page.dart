@@ -1,31 +1,26 @@
 import 'package:news_app/core/constants/imports.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.loginCubit;
+    final cubit = context.registerCubit;
     final textTheme = context.theme.textTheme;
 
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(0.05.sw),
+            padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
             child: Form(
               key: cubit.formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    AppStrings.hello,
-                    style: textTheme.displayMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                  Text(
-                    AppStrings.again,
+                    '${AppStrings.hello}!',
                     style: textTheme.displayMedium?.copyWith(
                       fontWeight: FontWeight.w800,
                       color: AppColors.primary,
@@ -34,7 +29,7 @@ class LoginPage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 0.0175.sh, bottom: 0.05.sh),
                     child: Text(
-                      AppStrings.welcomeBackMessage,
+                      AppStrings.registerMessage,
                       style: textTheme.titleLarge,
                     ),
                   ),
@@ -52,51 +47,13 @@ class LoginPage extends StatelessWidget {
                       obscureText: cubit.obscureText,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          ValueListenableBuilder(
-                            valueListenable: cubit.rememberMe,
-                            builder: (context, value, child) {
-                              return Container(
-                                width: 0.04.sw,
-                                height: 0.04.sw,
-                                margin: EdgeInsets.only(right: 0.02.sw),
-                                child: Checkbox(
-                                  value: value,
-                                  onChanged: (value) {
-                                    cubit.rememberMe.value = value!;
-                                  },
-                                ),
-                              );
-                            },
-                          ),
-                          Text(
-                            AppStrings.rememberMe,
-                            style: textTheme.labelLarge,
-                          ),
-                        ],
-                      ),
-                      GestureDetector(
-                        onTap: () async {},
-                        child: Text(
-                          AppStrings.forgotPassword,
-                          style: textTheme.labelLarge?.copyWith(
-                            color: AppColors.primary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 0.025.sh),
                     child: Row(
                       children: [
                         Expanded(
                           child: AppWidgets.customPrimaryButton(
-                            type: ButtonType.login,
+                            type: ButtonType.register,
                             onPressed: () {
                               cubit.formKey.currentState!.validate();
                             },
@@ -140,16 +97,16 @@ class LoginPage extends StatelessWidget {
                   Align(
                     child: RichText(
                       text: TextSpan(
-                        text: AppStrings.noAccount,
+                        text: AppStrings.haveAccount,
                         style: textTheme.labelLarge,
                         children: [
                           TextSpan(
-                            text: ' ${AppStrings.register}',
+                            text: ' ${AppStrings.login}',
                             style: textTheme.labelLarge
                                 ?.copyWith(color: AppColors.primary),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                context.goNamed(PAGES.register.screenName);
+                                context.pop();
                               },
                           ),
                         ],

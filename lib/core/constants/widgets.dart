@@ -147,4 +147,39 @@ class AppWidgets {
       ),
     );
   }
+
+  static Widget customPrimaryButton({
+    required ButtonType type,
+    required void Function()? onPressed,
+    required TextTheme textTheme,
+  }) {
+    String title;
+
+    switch (type) {
+      case ButtonType.login:
+        title = AppStrings.login;
+      case ButtonType.register:
+        title = AppStrings.register;
+    }
+    return FilledButton(
+      onPressed: onPressed,
+      style: FilledButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 13,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+        ),
+        backgroundColor: AppColors.primary,
+      ),
+      child: Text(
+        title,
+        style: textTheme.labelLarge?.copyWith(
+          color: AppColors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    );
+  }
 }

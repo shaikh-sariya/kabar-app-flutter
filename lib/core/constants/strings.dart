@@ -63,4 +63,8 @@ class AppStrings {
   static String get seeAll => 'See all';
 
   static String get required => 'Required*';
+
+  static String get registerMessage => 'Register to get started';
+
+  static String get haveAccount => 'Already have an account?';
 }

@@ -36,6 +36,16 @@ class AppRouter {
           create: (context) => LoginCubit(),
           child: const LoginPage(),
         ),
+        routes: [
+          GoRoute(
+            path: PAGES.register.screenPath,
+            name: PAGES.register.screenName,
+            builder: (context, state) => BlocProvider(
+              create: (context) => RegisterCubit(),
+              child: const RegisterPage(),
+            ),
+          ),
+        ],
       ),
     ],
   );

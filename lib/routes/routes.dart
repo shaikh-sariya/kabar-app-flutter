@@ -9,6 +9,8 @@ extension AppPageExtension on PAGES {
         return '/introduction';
       case PAGES.login:
         return '/login';
+      case PAGES.register:
+        return 'register';
     }
   }
 
@@ -20,6 +22,8 @@ extension AppPageExtension on PAGES {
         return 'INTRODUCTION';
       case PAGES.login:
         return 'LOGIN';
+      case PAGES.register:
+        return 'REGISTER';
     }
   }
 
@@ -31,6 +35,8 @@ extension AppPageExtension on PAGES {
         return 'Introduction';
       case PAGES.login:
         return 'Login';
+      case PAGES.register:
+        return 'Register';
     }
   }
 }
