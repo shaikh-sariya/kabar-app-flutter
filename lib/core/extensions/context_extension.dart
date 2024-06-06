@@ -5,6 +5,8 @@ extension ContextExtension on BuildContext {
 
   GoRouterState get goRouterState => GoRouterState.of(this);
 
+  SplashCubit get splashCubit => read<SplashCubit>();
+
   IntroductionCubit get introductionCubit => read<IntroductionCubit>();
 
   LoginCubit get loginCubit => read<LoginCubit>();
