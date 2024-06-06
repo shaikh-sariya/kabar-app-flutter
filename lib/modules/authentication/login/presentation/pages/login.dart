@@ -1,17 +1,13 @@
 import 'package:news_app/core/constants/imports.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.loginCubit;
     final textTheme = context.theme.textTheme;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -138,60 +134,18 @@ class _LoginPageState extends State<LoginPage> {
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(right: 0.025.sw),
-                            child: FilledButton(
-                              onPressed: () {},
-                              style: FilledButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 13,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                backgroundColor: AppColors.secondaryButton,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(AppImages.facebook),
-                                  Text(
-                                    '  ${AppStrings.facebook}',
-                                    style: textTheme.labelLarge?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            child: AppWidgets.customSocialButton(
+                              textTheme: textTheme,
+                              type: SocialPlatformType.facebook,
                             ),
                           ),
                         ),
                         Expanded(
                           child: Padding(
                             padding: EdgeInsets.only(left: 0.025.sw),
-                            child: FilledButton(
-                              onPressed: () {},
-                              style: FilledButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 24,
-                                  vertical: 13,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                backgroundColor: AppColors.secondaryButton,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(AppImages.google),
-                                  Text(
-                                    '  ${AppStrings.google}',
-                                    style: textTheme.labelLarge?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            child: AppWidgets.customSocialButton(
+                              textTheme: textTheme,
+                              type: SocialPlatformType.google,
                             ),
                           ),
                         ),

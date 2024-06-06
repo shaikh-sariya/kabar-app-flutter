@@ -1,0 +1,4 @@
+enum SocialPlatformType {
+  facebook,
+  google,
+}

@@ -12,6 +12,7 @@ export 'package:news_app/core/constants/strings.dart';
 export 'package:news_app/core/constants/widgets.dart';
 export 'package:news_app/core/debug/bloc_observer.dart';
 export 'package:news_app/core/enums/pages.dart';
+export 'package:news_app/core/enums/social_platform.dart';
 export 'package:news_app/core/enums/text_field.dart';
 export 'package:news_app/core/extensions/context_extension.dart';
 export 'package:news_app/core/theme/theme.dart';

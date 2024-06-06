@@ -105,4 +105,46 @@ class AppWidgets {
       ],
     );
   }
+
+  static Widget customSocialButton({
+    required TextTheme textTheme,
+    required SocialPlatformType type,
+  }) {
+    String title;
+    String assetName;
+
+    switch (type) {
+      case SocialPlatformType.facebook:
+        title = AppImages.facebook;
+        assetName = '  ${AppStrings.facebook}';
+      case SocialPlatformType.google:
+        title = AppImages.google;
+        assetName = '  ${AppStrings.google}';
+    }
+    return FilledButton(
+      onPressed: () {},
+      style: FilledButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+          vertical: 13,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+        ),
+        backgroundColor: AppColors.secondaryButton,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(assetName),
+          Text(
+            title,
+            style: textTheme.labelLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
