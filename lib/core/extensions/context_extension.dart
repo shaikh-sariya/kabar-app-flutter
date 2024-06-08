@@ -16,4 +16,6 @@ extension ContextExtension on BuildContext {
   RecoveryOptionCubit get recoveryOptionCubit => read<RecoveryOptionCubit>();
 
   ResetPasswordCubit get resetPasswordCubit => read<ResetPasswordCubit>();
+
+  PasswordSuccessCubit get passwordSuccessCubit => read<PasswordSuccessCubit>();
 }

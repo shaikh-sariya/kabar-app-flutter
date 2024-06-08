@@ -46,18 +46,13 @@ class AppRouter {
             ),
           ),
           GoRoute(
-            path: PAGES.forgotPassword.screenPath,
-            name: PAGES.forgotPassword.screenName,
-            builder: (context, state) => const Scaffold(),
+            path: PAGES.recoveryOption.screenPath,
+            name: PAGES.recoveryOption.screenName,
+            builder: (context, state) => BlocProvider(
+              create: (context) => RecoveryOptionCubit(),
+              child: const RecoveryOptionPage(),
+            ),
             routes: [
-              GoRoute(
-                path: PAGES.recoveryOption.screenPath,
-                name: PAGES.recoveryOption.screenName,
-                builder: (context, state) => BlocProvider(
-                  create: (context) => RecoveryOptionCubit(),
-                  child: const RecoveryOptionPage(),
-                ),
-              ),
               GoRoute(
                 path: PAGES.resetPassword.screenPath,
                 name: PAGES.resetPassword.screenName,
@@ -65,6 +60,16 @@ class AppRouter {
                   create: (context) => ResetPasswordCubit(),
                   child: const ResetPasswordPage(),
                 ),
+                routes: [
+                  GoRoute(
+                    path: PAGES.passwordSuccess.screenPath,
+                    name: PAGES.passwordSuccess.screenName,
+                    builder: (context, state) => BlocProvider(
+                      create: (context) => PasswordSuccessCubit(),
+                      child: const PasswordSuccessPage(),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

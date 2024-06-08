@@ -68,7 +68,7 @@ class AppWidgets {
         validator = (value) {
           if ((value ?? '').isEmpty) {
             return AppStrings.required;
-          } else if ((value ?? '') == passwordController?.text) {
+          } else if ((value ?? '') != passwordController!.text) {
             return AppStrings.passwordErrorText;
           }
           return null;
@@ -193,6 +193,8 @@ class AppWidgets {
         title = AppStrings.register;
       case ButtonType.submit:
         title = AppStrings.submit;
+      case ButtonType.goToLogin:
+        title = AppStrings.goToLogin;
     }
     return FilledButton(
       onPressed: onPressed,

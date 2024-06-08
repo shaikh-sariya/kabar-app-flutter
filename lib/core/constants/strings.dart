@@ -86,4 +86,10 @@ class AppStrings {
   static String get enterConfirmPassword => 'Enter Confirm Password';
 
   static String get passwordErrorText => 'Password does not match';
+
+  static String get successTitle => 'Congratulations!';
+
+  static String get successMessage => 'Your password reset successfully';
+
+  static String get goToLogin => 'Go to Login';
 }

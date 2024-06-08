@@ -11,12 +11,12 @@ extension AppPageExtension on PAGES {
         return '/login';
       case PAGES.register:
         return 'register';
-      case PAGES.forgotPassword:
-        return 'forgot-password';
       case PAGES.recoveryOption:
         return 'recovery-option';
       case PAGES.resetPassword:
         return 'reset-password';
+      case PAGES.passwordSuccess:
+        return 'password-success';
     }
   }
 
@@ -30,12 +30,12 @@ extension AppPageExtension on PAGES {
         return 'LOGIN';
       case PAGES.register:
         return 'REGISTER';
-      case PAGES.forgotPassword:
-        return 'FORGOT PASSWORD';
       case PAGES.recoveryOption:
         return 'RECOVERY OPTION';
       case PAGES.resetPassword:
         return 'RESET PASSWORD';
+      case PAGES.passwordSuccess:
+        return 'PASSWORD SUCCESS';
     }
   }
 
@@ -49,12 +49,12 @@ extension AppPageExtension on PAGES {
         return 'Login';
       case PAGES.register:
         return 'Register';
-      case PAGES.forgotPassword:
-        return 'Forgot Password';
       case PAGES.recoveryOption:
         return 'Recovery Option';
       case PAGES.resetPassword:
         return 'Reset Password';
+      case PAGES.passwordSuccess:
+        return 'Password Success';
     }
   }
 }

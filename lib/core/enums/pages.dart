@@ -3,7 +3,7 @@ enum PAGES {
   introduction,
   login,
   register,
-  forgotPassword,
   recoveryOption,
   resetPassword,
+  passwordSuccess,
 }

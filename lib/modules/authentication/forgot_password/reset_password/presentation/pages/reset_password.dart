@@ -9,6 +9,7 @@ class ResetPasswordPage extends StatelessWidget {
     final textTheme = context.theme.textTheme;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
@@ -41,7 +42,7 @@ class ResetPasswordPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 0.0175.sh),
+                      padding: EdgeInsets.only(bottom: 0.01.sh),
                       child: AppWidgets.customTextField(
                         context: context,
                         type: TextFieldType.newPassword,
@@ -64,7 +65,9 @@ class ResetPasswordPage extends StatelessWidget {
                         child: AppWidgets.customPrimaryButton(
                           type: ButtonType.submit,
                           onPressed: () {
-                            if (cubit.formKey.currentState!.validate()) {}
+                            if (cubit.formKey.currentState!.validate()) {
+                              context.goNamed(PAGES.passwordSuccess.screenName);
+                            }
                           },
                           textTheme: textTheme,
                         ),

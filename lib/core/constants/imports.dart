@@ -18,6 +18,8 @@ export 'package:news_app/core/enums/social_platform.dart';
 export 'package:news_app/core/enums/text_field.dart';
 export 'package:news_app/core/extensions/context_extension.dart';
 export 'package:news_app/core/theme/theme.dart';
+export 'package:news_app/modules/authentication/forgot_password/password_success/presentation/cubit/password_success_cubit.dart';
+export 'package:news_app/modules/authentication/forgot_password/password_success/presentation/pages/password_success.dart';
 export 'package:news_app/modules/authentication/forgot_password/recovery_option/presentation/cubit/recovery_option_cubit.dart';
 export 'package:news_app/modules/authentication/forgot_password/recovery_option/presentation/pages/recovery_option.dart';
 export 'package:news_app/modules/authentication/forgot_password/reset_password/presentation/cubit/reset_password_cubit.dart';
