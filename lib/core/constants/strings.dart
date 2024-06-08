@@ -74,4 +74,16 @@ class AppStrings {
       '''Don’t worry! it happens. Please enter the username associated with your account.''';
 
   static String get submit => 'Submit';
+
+  static String get reset => 'Reset';
+
+  static String get newPassword => 'New Password';
+
+  static String get enterNewPassword => 'Enter New Password';
+
+  static String get confirmPassword => 'Confirm Password';
+
+  static String get enterConfirmPassword => 'Enter Confirm Password';
+
+  static String get passwordErrorText => 'Password does not match';
 }

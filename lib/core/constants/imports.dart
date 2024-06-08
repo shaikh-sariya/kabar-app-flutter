@@ -20,6 +20,8 @@ export 'package:news_app/core/extensions/context_extension.dart';
 export 'package:news_app/core/theme/theme.dart';
 export 'package:news_app/modules/authentication/forgot_password/recovery_option/presentation/cubit/recovery_option_cubit.dart';
 export 'package:news_app/modules/authentication/forgot_password/recovery_option/presentation/pages/recovery_option.dart';
+export 'package:news_app/modules/authentication/forgot_password/reset_password/presentation/cubit/reset_password_cubit.dart';
+export 'package:news_app/modules/authentication/forgot_password/reset_password/presentation/pages/reset_password.dart';
 export 'package:news_app/modules/authentication/login/presentation/cubits/login_cubit.dart';
 export 'package:news_app/modules/authentication/login/presentation/pages/login.dart';
 export 'package:news_app/modules/authentication/register/presentation/cubit/register_cubit.dart';

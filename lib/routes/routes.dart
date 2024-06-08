@@ -15,6 +15,8 @@ extension AppPageExtension on PAGES {
         return 'forgot-password';
       case PAGES.recoveryOption:
         return 'recovery-option';
+      case PAGES.resetPassword:
+        return 'reset-password';
     }
   }
 
@@ -32,6 +34,8 @@ extension AppPageExtension on PAGES {
         return 'FORGOT PASSWORD';
       case PAGES.recoveryOption:
         return 'RECOVERY OPTION';
+      case PAGES.resetPassword:
+        return 'RESET PASSWORD';
     }
   }
 
@@ -49,6 +53,8 @@ extension AppPageExtension on PAGES {
         return 'Forgot Password';
       case PAGES.recoveryOption:
         return 'Recovery Option';
+      case PAGES.resetPassword:
+        return 'Reset Password';
     }
   }
 }

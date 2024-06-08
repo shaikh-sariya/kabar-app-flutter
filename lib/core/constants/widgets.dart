@@ -8,6 +8,7 @@ class AppWidgets {
     required TextFieldType type,
     required TextEditingController controller,
     ValueNotifier<bool>? obscureText,
+    TextEditingController? passwordController,
   }) {
     final textTheme = context.theme.textTheme;
     String text;
@@ -39,6 +40,36 @@ class AppWidgets {
         validator = (value) {
           if ((value ?? '').isEmpty) {
             return AppStrings.required;
+          }
+          return null;
+        };
+      case TextFieldType.newPassword:
+        text = AppStrings.newPassword;
+        hintText = AppStrings.enterNewPassword;
+        inputFormatters = [
+          FilteringTextInputFormatter.allow(
+            RegExp(r'[a-zA-Z0-9!@#$%^&*()_+=-]+'),
+          ),
+        ];
+        validator = (value) {
+          if ((value ?? '').isEmpty) {
+            return AppStrings.required;
+          }
+          return null;
+        };
+      case TextFieldType.confirmPassword:
+        text = AppStrings.confirmPassword;
+        hintText = AppStrings.enterConfirmPassword;
+        inputFormatters = [
+          FilteringTextInputFormatter.allow(
+            RegExp(r'[a-zA-Z0-9!@#$%^&*()_+=-]+'),
+          ),
+        ];
+        validator = (value) {
+          if ((value ?? '').isEmpty) {
+            return AppStrings.required;
+          } else if ((value ?? '') == passwordController?.text) {
+            return AppStrings.passwordErrorText;
           }
           return null;
         };

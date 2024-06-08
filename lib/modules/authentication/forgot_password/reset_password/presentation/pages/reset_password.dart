@@ -1,16 +1,15 @@
 import 'package:news_app/core/constants/imports.dart';
 
-class RecoveryOptionPage extends StatelessWidget {
-  const RecoveryOptionPage({super.key});
+class ResetPasswordPage extends StatelessWidget {
+  const ResetPasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.recoveryOptionCubit;
+    final cubit = context.resetPasswordCubit;
     final textTheme = context.theme.textTheme;
 
     return Scaffold(
       appBar: AppBar(),
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
@@ -23,13 +22,13 @@ class RecoveryOptionPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      AppStrings.forgot,
+                      AppStrings.reset,
                       style: textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     Text(
-                      '${AppStrings.password}?',
+                      AppStrings.password,
                       style: textTheme.displaySmall?.copyWith(
                         fontWeight: FontWeight.w800,
                       ),
@@ -41,10 +40,19 @@ class RecoveryOptionPage extends StatelessWidget {
                         style: textTheme.titleMedium,
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 0.0175.sh),
+                      child: AppWidgets.customTextField(
+                        context: context,
+                        type: TextFieldType.newPassword,
+                        controller: cubit.passwordController,
+                      ),
+                    ),
                     AppWidgets.customTextField(
                       context: context,
-                      type: TextFieldType.username,
-                      controller: cubit.usernameController,
+                      type: TextFieldType.confirmPassword,
+                      controller: cubit.confirmPasswordController,
+                      passwordController: cubit.passwordController,
                     ),
                   ],
                 ),
@@ -56,9 +64,7 @@ class RecoveryOptionPage extends StatelessWidget {
                         child: AppWidgets.customPrimaryButton(
                           type: ButtonType.submit,
                           onPressed: () {
-                            if (cubit.formKey.currentState!.validate()) {
-                              context.goNamed(PAGES.resetPassword.screenName);
-                            }
+                            if (cubit.formKey.currentState!.validate()) {}
                           },
                           textTheme: textTheme,
                         ),

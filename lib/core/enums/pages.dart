@@ -5,4 +5,5 @@ enum PAGES {
   register,
   forgotPassword,
   recoveryOption,
+  resetPassword,
 }
