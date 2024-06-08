@@ -3,4 +3,6 @@ enum PAGES {
   introduction,
   login,
   register,
+  forgotPassword,
+  recoveryOption,
 }

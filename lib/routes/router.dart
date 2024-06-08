@@ -45,6 +45,20 @@ class AppRouter {
               child: const RegisterPage(),
             ),
           ),
+          GoRoute(
+              path: PAGES.forgotPassword.screenPath,
+              name: PAGES.forgotPassword.screenName,
+              builder: (context, state) => const Scaffold(),
+              routes: [
+                GoRoute(
+                  path: PAGES.recoveryOption.screenPath,
+                  name: PAGES.recoveryOption.screenName,
+                  builder: (context, state) => BlocProvider(
+                    create: (context) => RecoveryOptionCubit(),
+                    child: const RecoveryOptionPage(),
+                  ),
+                ),
+              ]),
         ],
       ),
     ],

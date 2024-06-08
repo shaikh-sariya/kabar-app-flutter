@@ -12,4 +12,6 @@ extension ContextExtension on BuildContext {
   LoginCubit get loginCubit => read<LoginCubit>();
 
   RegisterCubit get registerCubit => read<RegisterCubit>();
+
+  RecoveryOptionCubit get recoveryOptionCubit => read<RecoveryOptionCubit>();
 }

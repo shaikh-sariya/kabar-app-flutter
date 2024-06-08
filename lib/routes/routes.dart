@@ -11,6 +11,10 @@ extension AppPageExtension on PAGES {
         return '/login';
       case PAGES.register:
         return 'register';
+      case PAGES.forgotPassword:
+        return 'forgot-password';
+      case PAGES.recoveryOption:
+        return 'recovery-option';
     }
   }
 
@@ -24,6 +28,10 @@ extension AppPageExtension on PAGES {
         return 'LOGIN';
       case PAGES.register:
         return 'REGISTER';
+      case PAGES.forgotPassword:
+        return 'FORGOT PASSWORD';
+      case PAGES.recoveryOption:
+        return 'RECOVERY OPTION';
     }
   }
 
@@ -37,6 +45,10 @@ extension AppPageExtension on PAGES {
         return 'Login';
       case PAGES.register:
         return 'Register';
+      case PAGES.forgotPassword:
+        return 'Forgot Password';
+      case PAGES.recoveryOption:
+        return 'Recovery Option';
     }
   }
 }

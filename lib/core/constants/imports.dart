@@ -18,6 +18,8 @@ export 'package:news_app/core/enums/social_platform.dart';
 export 'package:news_app/core/enums/text_field.dart';
 export 'package:news_app/core/extensions/context_extension.dart';
 export 'package:news_app/core/theme/theme.dart';
+export 'package:news_app/modules/authentication/forgot_password/recovery_option/presentation/cubit/recovery_option_cubit.dart';
+export 'package:news_app/modules/authentication/forgot_password/recovery_option/presentation/pages/recovery_option.dart';
 export 'package:news_app/modules/authentication/login/presentation/cubits/login_cubit.dart';
 export 'package:news_app/modules/authentication/login/presentation/pages/login.dart';
 export 'package:news_app/modules/authentication/register/presentation/cubit/register_cubit.dart';
@@ -30,6 +32,7 @@ export 'package:news_app/modules/onboarding/introduction/presentation/widgets/he
 export 'package:news_app/modules/onboarding/introduction/presentation/widgets/page_indicator.dart';
 export 'package:news_app/modules/onboarding/splash/presentation/cubits/splash_cubit.dart';
 export 'package:news_app/modules/onboarding/splash/presentation/pages/splash.dart';
+export 'package:news_app/my_app.dart';
 export 'package:news_app/routes/route_observer.dart';
 export 'package:news_app/routes/router.dart';
 export 'package:news_app/routes/routes.dart';

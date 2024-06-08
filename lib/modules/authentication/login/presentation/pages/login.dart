@@ -80,7 +80,9 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                       GestureDetector(
-                        onTap: () async {},
+                        onTap: () async {
+                          context.goNamed(PAGES.recoveryOption.screenName);
+                        },
                         child: Text(
                           AppStrings.forgotPassword,
                           style: textTheme.labelLarge?.copyWith(

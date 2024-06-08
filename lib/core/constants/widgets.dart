@@ -160,6 +160,8 @@ class AppWidgets {
         title = AppStrings.login;
       case ButtonType.register:
         title = AppStrings.register;
+      case ButtonType.submit:
+        title = AppStrings.submit;
     }
     return FilledButton(
       onPressed: onPressed,

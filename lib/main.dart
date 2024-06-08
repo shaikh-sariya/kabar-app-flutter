@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:news_app/my_app.dart';
+import 'package:news_app/core/constants/imports.dart';
 
 Future<void> main() async {
   // Perform app initialization, including configuration setup
