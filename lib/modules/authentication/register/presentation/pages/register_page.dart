@@ -13,7 +13,7 @@ class RegisterPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Form(
               key: cubit.formKey,
               child: Column(
@@ -27,7 +27,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 0.0175.sh, bottom: 0.05.sh),
+                    padding: const EdgeInsets.only(top: 16, bottom: 48),
                     child: Text(
                       AppStrings.registerMessage,
                       style: textTheme.titleLarge,
@@ -39,7 +39,7 @@ class RegisterPage extends StatelessWidget {
                     controller: cubit.usernameController,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0.015.sh),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: AppWidgets.customTextField(
                       context: context,
                       type: TextFieldType.password,
@@ -48,7 +48,7 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0.025.sh),
+                    padding: const EdgeInsets.only(top: 48, bottom: 16),
                     child: Row(
                       children: [
                         Expanded(
@@ -70,26 +70,23 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0.025.sh),
-                    child: Row(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: GridView(
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8,
+                        mainAxisExtent: 48,
+                      ),
                       children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 0.025.sw),
-                            child: AppWidgets.customSocialButton(
-                              textTheme: textTheme,
-                              type: SocialPlatformType.facebook,
-                            ),
-                          ),
+                        AppWidgets.customSocialButton(
+                          textTheme: textTheme,
+                          type: SocialPlatformType.facebook,
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 0.025.sw),
-                            child: AppWidgets.customSocialButton(
-                              textTheme: textTheme,
-                              type: SocialPlatformType.google,
-                            ),
-                          ),
+                        AppWidgets.customSocialButton(
+                          textTheme: textTheme,
+                          type: SocialPlatformType.google,
                         ),
                       ],
                     ),

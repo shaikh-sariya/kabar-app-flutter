@@ -13,7 +13,7 @@ class ResetPasswordPage extends StatelessWidget {
       appBar: AppBar(),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
             key: cubit.formKey,
             child: Column(
@@ -35,14 +35,14 @@ class ResetPasswordPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 0.0175.sh, bottom: 0.05.sh),
+                      padding: const EdgeInsets.only(top: 16, bottom: 48),
                       child: Text(
                         AppStrings.forgotPasswordMessage,
                         style: textTheme.titleMedium,
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 0.01.sh),
+                      padding: const EdgeInsets.only(bottom: 16),
                       child: AppWidgets.customTextField(
                         context: context,
                         type: TextFieldType.newPassword,
@@ -58,7 +58,7 @@ class ResetPasswordPage extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 0.025.sh),
+                  padding: const EdgeInsets.only(bottom: 16),
                   child: Row(
                     children: [
                       Expanded(

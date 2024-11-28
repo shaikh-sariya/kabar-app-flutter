@@ -2,6 +2,7 @@ import 'package:news_app/core/constants/imports.dart';
 
 class HeadlinesWidget extends StatelessWidget {
   const HeadlinesWidget({required this.index, super.key});
+
   final int index;
 
   @override
@@ -28,7 +29,7 @@ class HeadlinesWidget extends StatelessWidget {
       children: <Widget>[
         Image.asset(image!),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.05.sw),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -12,7 +12,7 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(0.05.sw),
+            padding: const EdgeInsets.all(16),
             child: Form(
               key: cubit.formKey,
               child: Column(
@@ -32,7 +32,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 0.0175.sh, bottom: 0.05.sh),
+                    padding: const EdgeInsets.only(top: 16, bottom: 48),
                     child: Text(
                       AppStrings.welcomeBackMessage,
                       style: textTheme.titleLarge,
@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
                     controller: cubit.usernameController,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0.015.sh),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     child: AppWidgets.customTextField(
                       context: context,
                       type: TextFieldType.password,
@@ -61,11 +61,14 @@ class LoginPage extends StatelessWidget {
                             valueListenable: cubit.rememberMe,
                             builder: (context, value, child) {
                               return Container(
-                                width: 0.04.sw,
-                                height: 0.04.sw,
-                                margin: EdgeInsets.only(right: 0.02.sw),
+                                width: 16,
+                                height: 16,
+                                margin: const EdgeInsets.only(right: 8),
                                 child: Checkbox(
                                   value: value,
+                                  fillColor: WidgetStatePropertyAll(
+                                    value ? AppColors.primary : AppColors.white,
+                                  ),
                                   onChanged: (value) {
                                     cubit.rememberMe.value = value!;
                                   },
@@ -93,7 +96,7 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0.025.sh),
+                    padding: const EdgeInsets.only(top: 48, bottom: 16),
                     child: Row(
                       children: [
                         Expanded(
@@ -115,26 +118,23 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0.025.sh),
-                    child: Row(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: GridView(
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8,
+                        mainAxisExtent: 48,
+                      ),
                       children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 0.025.sw),
-                            child: AppWidgets.customSocialButton(
-                              textTheme: textTheme,
-                              type: SocialPlatformType.facebook,
-                            ),
-                          ),
+                        AppWidgets.customSocialButton(
+                          textTheme: textTheme,
+                          type: SocialPlatformType.facebook,
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 0.025.sw),
-                            child: AppWidgets.customSocialButton(
-                              textTheme: textTheme,
-                              type: SocialPlatformType.google,
-                            ),
-                          ),
+                        AppWidgets.customSocialButton(
+                          textTheme: textTheme,
+                          type: SocialPlatformType.google,
                         ),
                       ],
                     ),

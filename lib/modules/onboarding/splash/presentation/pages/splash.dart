@@ -9,10 +9,12 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
+  late final SplashCubit cubit;
+
   @override
   void initState() {
     super.initState();
-    final cubit = context.splashCubit
+    cubit = context.splashCubit
       ..controller = AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: 1500),
@@ -25,14 +27,12 @@ class _SplashPageState extends State<SplashPage>
 
   @override
   void dispose() {
-    final cubit = context.splashCubit;
     cubit.controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.splashCubit;
     return Scaffold(
       body: Center(
         child: FadeTransition(

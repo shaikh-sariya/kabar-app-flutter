@@ -12,14 +12,14 @@ class AppWidgets {
   }) {
     final textTheme = context.theme.textTheme;
     String text;
-    String hintText;
+    String labelText;
     List<TextInputFormatter>? inputFormatters;
     String? Function(String?)? validator;
 
     switch (type) {
       case TextFieldType.username:
         text = AppStrings.userName;
-        hintText = AppStrings.enterUsername;
+        labelText = AppStrings.enterUsername;
         inputFormatters = [
           FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9_]+')),
         ];
@@ -31,7 +31,7 @@ class AppWidgets {
         };
       case TextFieldType.password:
         text = AppStrings.password;
-        hintText = AppStrings.enterPassword;
+        labelText = AppStrings.enterPassword;
         inputFormatters = [
           FilteringTextInputFormatter.allow(
             RegExp(r'[a-zA-Z0-9!@#$%^&*()_+=-]+'),
@@ -45,7 +45,7 @@ class AppWidgets {
         };
       case TextFieldType.newPassword:
         text = AppStrings.newPassword;
-        hintText = AppStrings.enterNewPassword;
+        labelText = AppStrings.enterNewPassword;
         inputFormatters = [
           FilteringTextInputFormatter.allow(
             RegExp(r'[a-zA-Z0-9!@#$%^&*()_+=-]+'),
@@ -59,7 +59,7 @@ class AppWidgets {
         };
       case TextFieldType.confirmPassword:
         text = AppStrings.confirmPassword;
-        hintText = AppStrings.enterConfirmPassword;
+        labelText = AppStrings.enterConfirmPassword;
         inputFormatters = [
           FilteringTextInputFormatter.allow(
             RegExp(r'[a-zA-Z0-9!@#$%^&*()_+=-]+'),
@@ -112,7 +112,9 @@ class AppWidgets {
                     borderRadius: BorderRadius.circular(6.r),
                     borderSide: const BorderSide(color: AppColors.mandatory),
                   ),
-                  hintText: hintText,
+                  labelText: labelText,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                  prefixText: type == TextFieldType.username ? '@' : null,
                   suffixIcon: type == TextFieldType.password
                       ? value
                           ? GestureDetector(

@@ -10,7 +10,7 @@ class PasswordSuccessPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 0.025.sw),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -20,7 +20,7 @@ class PasswordSuccessPage extends StatelessWidget {
                   children: [
                     SvgPicture.asset(AppImages.appLogo),
                     Padding(
-                      padding: EdgeInsets.only(top: 0.05.sh, bottom: 0.01.sh),
+                      padding: const EdgeInsets.only(top: 16, bottom: 48),
                       child: Text(
                         AppStrings.successTitle,
                         style: textTheme.displaySmall
@@ -35,7 +35,7 @@ class PasswordSuccessPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 0.025.sh),
+                padding: const EdgeInsets.only(bottom: 16),
                 child: Row(
                   children: [
                     Expanded(

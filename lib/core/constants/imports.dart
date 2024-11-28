@@ -28,8 +28,6 @@ export 'package:news_app/modules/authentication/login/presentation/cubits/login_
 export 'package:news_app/modules/authentication/login/presentation/pages/login.dart';
 export 'package:news_app/modules/authentication/register/presentation/cubit/register_cubit.dart';
 export 'package:news_app/modules/authentication/register/presentation/pages/register_page.dart';
-export 'package:news_app/modules/common/bottom_navigation_bar/cubit/bottom_navigation_bar_cubit.dart';
-export 'package:news_app/modules/common/bottom_navigation_bar/pages/bottom_navigation_bar.dart';
 export 'package:news_app/modules/onboarding/introduction/presentation/cubits/introduction_cubit.dart';
 export 'package:news_app/modules/onboarding/introduction/presentation/pages/introduction.dart';
 export 'package:news_app/modules/onboarding/introduction/presentation/widgets/headlines.dart';

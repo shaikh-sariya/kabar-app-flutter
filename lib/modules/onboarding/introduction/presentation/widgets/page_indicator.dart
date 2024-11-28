@@ -16,7 +16,7 @@ class PageIndicatorWidget extends StatelessWidget {
             (index) => Container(
               width: 15,
               height: 15,
-              margin: EdgeInsets.only(right: 0.015.sw),
+              margin: const EdgeInsets.only(right: 8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: index == value ? AppColors.primary : AppColors.body,
