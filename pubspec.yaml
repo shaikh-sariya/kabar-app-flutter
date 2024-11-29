@@ -13,10 +13,12 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_dotenv: ^5.2.1
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.16
   go_router: ^14.6.1
   google_fonts: ^6.2.1
+  supabase_flutter: ^2.8.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -29,6 +31,7 @@ flutter:
   uses-material-design: true
 
   assets:
-     - assets/images/
-     - assets/icons/
+    - assets/images/
+    - assets/icons/
+    - .env
 

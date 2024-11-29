@@ -17,15 +17,47 @@ class AppWidgets {
     String? Function(String?)? validator;
 
     switch (type) {
-      case TextFieldType.username:
-        text = AppStrings.userName;
-        labelText = AppStrings.enterUsername;
+      case TextFieldType.name:
+        text = AppStrings.name;
+        labelText = AppStrings.enterName;
         inputFormatters = [
-          FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9_]+')),
+          NameInputFormatter(),
+          FirstLetterUppercaseFormatter(),
         ];
         validator = (value) {
           if ((value ?? '').isEmpty) {
             return AppStrings.required;
+          }
+          if (!AppValidators.validateName(value ?? '')) {
+            return AppStrings.validName;
+          }
+          return null;
+        };
+      case TextFieldType.email:
+        text = AppStrings.email;
+        labelText = AppStrings.enterEmail;
+        inputFormatters = [
+          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9@._\-]')),
+        ];
+        validator = (value) {
+          if ((value ?? '').isEmpty) {
+            return AppStrings.required;
+          }
+          if (!AppValidators.validateEmail(value ?? '')) {
+            return AppStrings.validEmail;
+          }
+          return null;
+        };
+      case TextFieldType.username:
+        text = AppStrings.userName;
+        labelText = AppStrings.enterUsername;
+        inputFormatters = [UsernameInputFormatter()];
+        validator = (value) {
+          if ((value ?? '').isEmpty) {
+            return AppStrings.required;
+          }
+          if (!AppValidators.validateUsername(value ?? '')) {
+            return AppStrings.validUsername;
           }
           return null;
         };
@@ -40,6 +72,9 @@ class AppWidgets {
         validator = (value) {
           if ((value ?? '').isEmpty) {
             return AppStrings.required;
+          }
+          if (!AppValidators.validateStrongPassword(value ?? '')) {
+            return AppStrings.enterValidPassword;
           }
           return null;
         };
@@ -68,7 +103,8 @@ class AppWidgets {
         validator = (value) {
           if ((value ?? '').isEmpty) {
             return AppStrings.required;
-          } else if ((value ?? '') != passwordController!.text) {
+          } else if ((value ?? '') !=
+              (passwordController ?? TextEditingController()).text) {
             return AppStrings.passwordErrorText;
           }
           return null;
@@ -115,7 +151,8 @@ class AppWidgets {
                   labelText: labelText,
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   prefixText: type == TextFieldType.username ? '@' : null,
-                  suffixIcon: type == TextFieldType.password
+                  suffixIcon: type == TextFieldType.password ||
+                          type == TextFieldType.confirmPassword
                       ? value
                           ? GestureDetector(
                               onTap: () async {
@@ -142,6 +179,7 @@ class AppWidgets {
   static Widget customSocialButton({
     required TextTheme textTheme,
     required SocialPlatformType type,
+    void Function()? onPressed,
   }) {
     String title;
     String assetName;
@@ -155,7 +193,7 @@ class AppWidgets {
         title = '  ${AppStrings.google}';
     }
     return FilledButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: FilledButton.styleFrom(
         padding: const EdgeInsets.symmetric(
           horizontal: 24,
@@ -216,6 +254,31 @@ class AppWidgets {
           color: AppColors.white,
           fontWeight: FontWeight.bold,
         ),
+      ),
+    );
+  }
+
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+      customSnackBar({
+    required BuildContext context,
+    required String content,
+  }) {
+    final colorScheme = context.theme.colorScheme;
+
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(content),
+        behavior: SnackBarBehavior.floating,
+        action: SnackBarAction(
+          label: AppStrings.close,
+          textColor: colorScheme.surface,
+          onPressed: () {
+            ScaffoldMessenger.of(context).clearSnackBars();
+          },
+        ),
+        backgroundColor: AppColors.mandatory,
+        dismissDirection: DismissDirection.down,
+        elevation: 12,
       ),
     );
   }

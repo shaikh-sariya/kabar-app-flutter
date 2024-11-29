@@ -6,14 +6,19 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.registerCubit;
+    final theme = context.theme;
     final textTheme = context.theme.textTheme;
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: theme.scaffoldBackgroundColor,
+        surfaceTintColor: theme.scaffoldBackgroundColor,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(16),
             child: Form(
               key: cubit.formKey,
               child: Column(
@@ -35,8 +40,21 @@ class RegisterPage extends StatelessWidget {
                   ),
                   AppWidgets.customTextField(
                     context: context,
-                    type: TextFieldType.username,
-                    controller: cubit.usernameController,
+                    type: TextFieldType.name,
+                    controller: cubit.nameController,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child: AppWidgets.customTextField(
+                      context: context,
+                      type: TextFieldType.username,
+                      controller: cubit.usernameController,
+                    ),
+                  ),
+                  AppWidgets.customTextField(
+                    context: context,
+                    type: TextFieldType.email,
+                    controller: cubit.emailController,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -47,6 +65,33 @@ class RegisterPage extends StatelessWidget {
                       obscureText: cubit.obscureText,
                     ),
                   ),
+                  AppWidgets.customTextField(
+                    context: context,
+                    type: TextFieldType.confirmPassword,
+                    controller: cubit.confirmPasswordController,
+                    passwordController: cubit.passwordController,
+                    obscureText: cubit.obscureConfirmText,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: RichText(
+                      text: TextSpan(
+                        style: textTheme.bodySmall?.copyWith(
+                          color: theme.hintColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        text: AppStrings.note,
+                        children: [
+                          const TextSpan(text: ': '),
+                          TextSpan(
+                            style: textTheme.bodySmall
+                                ?.copyWith(color: theme.hintColor),
+                            text: AppStrings.passwordNote,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 48, bottom: 16),
                     child: Row(
@@ -54,8 +99,23 @@ class RegisterPage extends StatelessWidget {
                         Expanded(
                           child: AppWidgets.customPrimaryButton(
                             type: ButtonType.register,
-                            onPressed: () {
-                              cubit.formKey.currentState!.validate();
+                            onPressed: () async {
+                              if (cubit.formKey.currentState!.validate()) {
+                                final response = await cubit.registerUser();
+                                if ((response ?? '').isNotEmpty) {
+                                  final capitalizedResponse =
+                                      (response ?? '')[0].toUpperCase() +
+                                          (response ?? '')
+                                              .substring(1)
+                                              .toLowerCase();
+                                  if (context.mounted) {
+                                    AppWidgets.customSnackBar(
+                                      context: context,
+                                      content: capitalizedResponse,
+                                    );
+                                  }
+                                }
+                              }
                             },
                             textTheme: textTheme,
                           ),

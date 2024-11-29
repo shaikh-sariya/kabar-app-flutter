@@ -34,11 +34,15 @@ class AppStrings {
 
   static String get enterUsername => 'Enter Username';
 
+  static String get validUsername => 'Enter valid username';
+
   static String get asterisk => '*';
 
   static String get password => 'Password';
 
   static String get enterPassword => 'Enter Password';
+
+  static String get enterValidPassword => 'Enter valid password';
 
   static String get forgotPassword => 'Forgot password?';
 
@@ -92,4 +96,23 @@ class AppStrings {
   static String get successMessage => 'Your password reset successfully';
 
   static String get goToLogin => 'Go to Login';
+
+  static String get name => 'Full Name';
+
+  static String get enterName => 'Enter Full Name';
+
+  static String get validName => 'Enter valid full name';
+
+  static String get email => 'Email Address';
+
+  static String get enterEmail => 'Enter Email Address';
+
+  static String get validEmail => 'Enter valid email address';
+
+  static String get note => 'Note';
+
+  static String get passwordNote =>
+      '''Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.''';
+
+  static String get close => 'CLOSE';
 }

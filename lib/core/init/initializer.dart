@@ -8,6 +8,13 @@ class AppInitializer {
     // Ensure Flutter widgets are initialized.
     WidgetsFlutterBinding.ensureInitialized();
 
+    await dotenv.load();
+
+    await Supabase.initialize(
+      url: dotenv.env['SUPABASE_URL'] ?? '',
+      anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
+    );
+
     await ScreenUtil.ensureScreenSize();
 
     Bloc.observer = AppBlocObserver();
