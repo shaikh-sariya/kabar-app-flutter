@@ -60,7 +60,11 @@ class AppRouter {
                   create: (context) => OneTimePasswordCubit(),
                   child: OneTimePasswordPage(
                     user: ((state.extra ?? Object)
-                        as Map<String, dynamic>)['user'] as User,
+                        as Map<String, dynamic>)['user'] as User?,
+                    email: ((state.extra ?? Object)
+                        as Map<String, dynamic>)['email'] as String?,
+                    canPop: ((state.extra ?? Object)
+                        as Map<String, dynamic>)['canPop'] as bool?,
                   ),
                 ),
                 routes: [

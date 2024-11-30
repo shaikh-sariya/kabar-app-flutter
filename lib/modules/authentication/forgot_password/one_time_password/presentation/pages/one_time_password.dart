@@ -1,26 +1,31 @@
 import 'package:news_app/core/constants/imports.dart';
 
 class OneTimePasswordPage extends StatelessWidget {
-  const OneTimePasswordPage({required this.user, super.key});
+  const OneTimePasswordPage({this.user, this.email, this.canPop, super.key});
 
-  final User user;
+  final User? user;
+  final String? email;
+  final bool? canPop;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.oneTimePasswordCubit..user = user;
+    final cubit = context.oneTimePasswordCubit
+      ..user = user
+      ..email = email;
     final theme = context.theme;
     final textTheme = context.theme.textTheme;
+    final emailAddress = user?.email ?? email;
 
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: theme.scaffoldBackgroundColor,
         surfaceTintColor: theme.scaffoldBackgroundColor,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: canPop ?? false,
       ),
       body: SafeArea(
         child: PopScope(
-          canPop: false,
+          canPop: canPop ?? false,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Form(
@@ -38,7 +43,7 @@ class OneTimePasswordPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 16, bottom: 48),
                         child: Text(
-                          '${AppStrings.otpMessage}${user.email ?? ''}',
+                          '${AppStrings.otpMessage}$emailAddress',
                           style: textTheme.titleMedium
                               ?.copyWith(color: AppColors.body),
                           textAlign: TextAlign.center,

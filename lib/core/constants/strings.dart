@@ -76,10 +76,10 @@ class AppStrings {
 
   static String get haveAccount => 'Already have an account?';
 
-  static String get forgot => 'Forgot';
+  static String get forgotPasswordTitle => 'Forgot Password?';
 
   static String get forgotPasswordMessage =>
-      '''Don’t worry! it happens. Please enter the username associated with your account.''';
+      '''Don’t worry! it happens. Please enter the email address associated with your account.''';
 
   static String get submit => 'Submit';
 

@@ -103,58 +103,56 @@ class LoginPage extends StatelessWidget {
                             textTheme: textTheme,
                             valueListenable: cubit.loggingIn,
                             onPressed: () async {
-                              final response = await cubit.login();
-                              if ((response ?? '').isNotEmpty) {
-                                final capitalizedResponse = (response ?? '')[0]
-                                        .toUpperCase() +
-                                    (response ?? '').substring(1).toLowerCase();
-                                final success =
-                                    (response ?? '') == 'email_not_confirmed';
-                                if (context.mounted && !success) {
-                                  AppWidgets.customSnackBar(
-                                    context: context,
-                                    content: capitalizedResponse,
-                                  );
-                                }
-                                if (success) {
-                                  final response = await cubit.sendOTP();
-                                  if ((response ?? '').isNotEmpty) {
-                                    final capitalizedResponse =
-                                        (response ?? '')[0].toUpperCase() +
-                                            (response ?? '')
-                                                .substring(1)
-                                                .toLowerCase();
-                                    if (context.mounted) {
-                                      AppWidgets.customSnackBar(
-                                        context: context,
-                                        content: capitalizedResponse,
-                                      );
-                                    }
-                                  } else {
-                                    if (context.mounted) {
-                                      AppWidgets.customSnackBar(
-                                        context: context,
-                                        content: AppStrings.verificationMessage,
-                                        success: success,
-                                      );
-                                      await context.pushNamed(
-                                        PAGES.oneTimePassword.screenName,
-                                        extra: {
-                                          'user': User(
-                                            id: 'id',
-                                            appMetadata: {},
-                                            userMetadata: {},
-                                            aud: 'aud',
-                                            createdAt: 'createdAt',
-                                            email: cubit.emailController.text,
-                                          ),
-                                        },
-                                      );
+                              if (cubit.formKey.currentState!.validate()) {
+                                final response = await cubit.login();
+                                if ((response ?? '').isNotEmpty) {
+                                  final capitalizedResponse =
+                                      (response ?? '')[0].toUpperCase() +
+                                          (response ?? '')
+                                              .substring(1)
+                                              .toLowerCase();
+                                  final success =
+                                      (response ?? '') == 'email_not_confirmed';
+                                  if (context.mounted && !success) {
+                                    AppWidgets.customSnackBar(
+                                      context: context,
+                                      content: capitalizedResponse,
+                                    );
+                                  }
+                                  if (success) {
+                                    final response = await cubit.sendOTP();
+                                    if ((response ?? '').isNotEmpty) {
+                                      final capitalizedResponse =
+                                          (response ?? '')[0].toUpperCase() +
+                                              (response ?? '')
+                                                  .substring(1)
+                                                  .toLowerCase();
+                                      if (context.mounted) {
+                                        AppWidgets.customSnackBar(
+                                          context: context,
+                                          content: capitalizedResponse,
+                                        );
+                                      }
+                                    } else {
+                                      if (context.mounted) {
+                                        AppWidgets.customSnackBar(
+                                          context: context,
+                                          content:
+                                              AppStrings.verificationMessage,
+                                          success: success,
+                                        );
+                                        await context.pushNamed(
+                                          PAGES.oneTimePassword.screenName,
+                                          extra: {
+                                            'email': cubit.emailController.text,
+                                          },
+                                        );
+                                      }
                                     }
                                   }
+                                } else {
+                                  // TODO(navigation): Navigate to HomePage.
                                 }
-                              } else {
-                                // TODO(navigation): Navigate to HomePage.
                               }
                             },
                           ),

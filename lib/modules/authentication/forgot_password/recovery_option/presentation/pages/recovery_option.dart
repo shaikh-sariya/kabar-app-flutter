@@ -10,10 +10,9 @@ class RecoveryOptionPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: cubit.formKey,
             child: Column(
@@ -22,16 +21,12 @@ class RecoveryOptionPage extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      AppStrings.forgot,
-                      style: textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    Text(
-                      '${AppStrings.password}?',
-                      style: textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+                    SizedBox(
+                      width: 0.6.sw,
+                      child: Text(
+                        AppStrings.forgotPasswordTitle,
+                        style: textTheme.displaySmall
+                            ?.copyWith(fontWeight: FontWeight.w800),
                       ),
                     ),
                     Padding(
@@ -43,28 +38,52 @@ class RecoveryOptionPage extends StatelessWidget {
                     ),
                     AppWidgets.customTextField(
                       context: context,
-                      type: TextFieldType.username,
-                      controller: cubit.usernameController,
+                      type: TextFieldType.email,
+                      controller: cubit.emailController,
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: AppWidgets.customPrimaryButton(
-                          type: ButtonType.submit,
-                          onPressed: () {
-                            if (cubit.formKey.currentState!.validate()) {
-                              context.goNamed(PAGES.resetPassword.screenName);
+                Row(
+                  children: [
+                    Expanded(
+                      child: AppWidgets.customPrimaryButton(
+                        type: ButtonType.submit,
+                        textTheme: textTheme,
+                        valueListenable: cubit.submitting,
+                        onPressed: () async {
+                          if (cubit.formKey.currentState!.validate()) {
+                            final response = await cubit.sendOTP();
+                            if ((response ?? '').isNotEmpty) {
+                              final capitalizedResponse = (response ?? '')[0]
+                                      .toUpperCase() +
+                                  (response ?? '').substring(1).toLowerCase();
+                              if (context.mounted) {
+                                AppWidgets.customSnackBar(
+                                  context: context,
+                                  content: capitalizedResponse,
+                                );
+                              }
+                            } else {
+                              if (context.mounted) {
+                                AppWidgets.customSnackBar(
+                                  context: context,
+                                  content: AppStrings.verificationMessage,
+                                  success: true,
+                                );
+                                context.goNamed(
+                                  PAGES.oneTimePassword.screenName,
+                                  extra: {
+                                    'email': cubit.emailController.text,
+                                    'canPop': true,
+                                  },
+                                );
+                              }
                             }
-                          },
-                          textTheme: textTheme,
-                        ),
+                          }
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ],
             ),
