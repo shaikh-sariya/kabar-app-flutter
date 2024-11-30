@@ -7,6 +7,8 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
 
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final obscureText = ValueNotifier<bool>(true);
+  final obscureConfirmText = ValueNotifier<bool>(true);
 
   final formKey = GlobalKey<FormState>();
 }

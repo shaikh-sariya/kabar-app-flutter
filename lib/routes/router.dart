@@ -73,7 +73,10 @@ class AppRouter {
                     name: PAGES.resetPassword.screenName,
                     builder: (context, state) => BlocProvider(
                       create: (context) => ResetPasswordCubit(),
-                      child: const ResetPasswordPage(),
+                      child: ResetPasswordPage(
+                        email: ((state.extra ?? Object)
+                            as Map<String, dynamic>)['email'] as String,
+                      ),
                     ),
                     routes: [
                       GoRoute(

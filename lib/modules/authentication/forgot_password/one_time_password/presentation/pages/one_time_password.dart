@@ -11,7 +11,8 @@ class OneTimePasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.oneTimePasswordCubit
       ..user = user
-      ..email = email;
+      ..email = email
+      ..canPop = canPop;
     final theme = context.theme;
     final textTheme = context.theme.textTheme;
     final emailAddress = user?.email ?? email;
@@ -123,9 +124,16 @@ class OneTimePasswordPage extends StatelessWidget {
                               }
                             } else {
                               if (context.mounted) {
-                                Navigator.of(context).popUntil(
-                                  ModalRoute.withName(PAGES.login.screenName),
-                                );
+                                if (canPop ?? false) {
+                                  context.goNamed(
+                                    PAGES.resetPassword.screenName,
+                                    extra: {'email': email ?? ''},
+                                  );
+                                } else {
+                                  Navigator.of(context).popUntil(
+                                    ModalRoute.withName(PAGES.login.screenName),
+                                  );
+                                }
                               }
                             }
                           },

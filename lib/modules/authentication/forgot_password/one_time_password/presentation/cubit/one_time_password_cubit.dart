@@ -15,6 +15,7 @@ class OneTimePasswordCubit extends Cubit<OneTimePasswordState> {
   final supabase = Supabase.instance.client;
   User? user;
   String? email;
+  bool? canPop;
 
   final canResendOtp = ValueNotifier<bool>(false);
   final submittingOTP = ValueNotifier<bool>(false);
@@ -29,9 +30,6 @@ class OneTimePasswordCubit extends Cubit<OneTimePasswordState> {
         token: controllers.map((e) => e.text).join(),
         email: user?.email ?? email,
       );
-      await supabase.auth.updateUser(
-        UserAttributes(data: {'email_verified': true}),
-      );
       return null;
     } on AuthException catch (e) {
       submittingOTP.value = false;
@@ -41,10 +39,14 @@ class OneTimePasswordCubit extends Cubit<OneTimePasswordState> {
 
   Future<String?> resendOTP() async {
     try {
-      await supabase.auth.resend(
-        type: OtpType.email,
-        email: user?.email ?? email,
-      );
+      if (canPop ?? false) {
+        await supabase.auth.resetPasswordForEmail(email ?? '');
+      } else {
+        await supabase.auth.resend(
+          type: OtpType.signup,
+          email: user?.email ?? email,
+        );
+      }
       return null;
     } on AuthException catch (e) {
       return e.message;

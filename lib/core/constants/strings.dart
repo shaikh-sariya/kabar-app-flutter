@@ -85,7 +85,10 @@ class AppStrings {
 
   static String get submitting => 'Submitting';
 
-  static String get reset => 'Reset';
+  static String get resetTitle => 'Reset Password';
+
+  static String get resetPasswordMessage =>
+      '''You're almost there! Please enter your new password below to reset your account.''';
 
   static String get newPassword => 'New Password';
 

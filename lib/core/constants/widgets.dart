@@ -91,6 +91,9 @@ class AppWidgets {
           if ((value ?? '').isEmpty) {
             return AppStrings.required;
           }
+          if (!AppValidators.validateStrongPassword(value ?? '')) {
+            return AppStrings.enterValidPassword;
+          }
           return null;
         };
       case TextFieldType.confirmPassword:
@@ -153,7 +156,8 @@ class AppWidgets {
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   prefixText: type == TextFieldType.username ? '@' : null,
                   suffixIcon: type == TextFieldType.password ||
-                          type == TextFieldType.confirmPassword
+                          type == TextFieldType.confirmPassword ||
+                          type == TextFieldType.newPassword
                       ? value
                           ? GestureDetector(
                               onTap: () async {

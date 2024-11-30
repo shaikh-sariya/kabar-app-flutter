@@ -1,65 +1,85 @@
 import 'package:news_app/core/constants/imports.dart';
 
 class ResetPasswordPage extends StatelessWidget {
-  const ResetPasswordPage({super.key});
+  const ResetPasswordPage({required this.email, super.key});
+
+  final String email;
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.resetPasswordCubit;
+    final theme = context.theme;
     final textTheme = context.theme.textTheme;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(automaticallyImplyLeading: false),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Form(
-            key: cubit.formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppStrings.reset,
-                      style: textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+        child: PopScope(
+          canPop: false,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Form(
+              key: cubit.formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 0.5.sw,
+                        child: Text(
+                          AppStrings.resetTitle,
+                          style: textTheme.displaySmall
+                              ?.copyWith(fontWeight: FontWeight.w800),
+                        ),
                       ),
-                    ),
-                    Text(
-                      AppStrings.password,
-                      style: textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16, bottom: 48),
+                        child: Text(
+                          AppStrings.resetPasswordMessage,
+                          style: textTheme.titleMedium,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16, bottom: 48),
-                      child: Text(
-                        AppStrings.forgotPasswordMessage,
-                        style: textTheme.titleMedium,
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: AppWidgets.customTextField(
+                          context: context,
+                          type: TextFieldType.newPassword,
+                          controller: cubit.passwordController,
+                          obscureText: cubit.obscureText,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: AppWidgets.customTextField(
+                      AppWidgets.customTextField(
                         context: context,
-                        type: TextFieldType.newPassword,
-                        controller: cubit.passwordController,
+                        type: TextFieldType.confirmPassword,
+                        controller: cubit.confirmPasswordController,
+                        passwordController: cubit.passwordController,
+                        obscureText: cubit.obscureConfirmText,
                       ),
-                    ),
-                    AppWidgets.customTextField(
-                      context: context,
-                      type: TextFieldType.confirmPassword,
-                      controller: cubit.confirmPasswordController,
-                      passwordController: cubit.passwordController,
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: Row(
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: RichText(
+                          text: TextSpan(
+                            style: textTheme.bodySmall?.copyWith(
+                              color: theme.hintColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            text: AppStrings.note,
+                            children: [
+                              const TextSpan(text: ': '),
+                              TextSpan(
+                                style: textTheme.bodySmall
+                                    ?.copyWith(color: theme.hintColor),
+                                text: AppStrings.passwordNote,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
                     children: [
                       Expanded(
                         child: AppWidgets.customPrimaryButton(
@@ -74,8 +94,8 @@ class ResetPasswordPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
