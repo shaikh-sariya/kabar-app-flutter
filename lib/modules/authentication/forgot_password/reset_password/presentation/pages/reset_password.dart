@@ -1,13 +1,20 @@
 import 'package:news_app/core/constants/imports.dart';
 
 class ResetPasswordPage extends StatelessWidget {
-  const ResetPasswordPage({required this.email, super.key});
+  const ResetPasswordPage({
+    required this.email,
+    this.user,
+    this.canPop,
+    super.key,
+  });
 
   final String email;
+  final User? user;
+  final bool? canPop;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.resetPasswordCubit;
+    final cubit = context.resetPasswordCubit..email = email;
     final theme = context.theme;
     final textTheme = context.theme.textTheme;
 
@@ -84,12 +91,35 @@ class ResetPasswordPage extends StatelessWidget {
                       Expanded(
                         child: AppWidgets.customPrimaryButton(
                           type: ButtonType.submit,
-                          onPressed: () {
+                          textTheme: textTheme,
+                          valueListenable: cubit.submitting,
+                          onPressed: () async {
                             if (cubit.formKey.currentState!.validate()) {
-                              context.goNamed(PAGES.passwordSuccess.screenName);
+                              final response = await cubit.updateUser();
+                              if ((response ?? '').isNotEmpty) {
+                                final capitalizedResponse = (response ?? '')[0]
+                                        .toUpperCase() +
+                                    (response ?? '').substring(1).toLowerCase();
+                                if (context.mounted) {
+                                  AppWidgets.customSnackBar(
+                                    context: context,
+                                    content: capitalizedResponse,
+                                  );
+                                }
+                              } else {
+                                if (context.mounted) {
+                                  context.goNamed(
+                                    PAGES.passwordSuccess.screenName,
+                                    extra: {
+                                      'email': email,
+                                      'user': user,
+                                      'canPop': canPop,
+                                    },
+                                  );
+                                }
+                              }
                             }
                           },
-                          textTheme: textTheme,
                         ),
                       ),
                     ],

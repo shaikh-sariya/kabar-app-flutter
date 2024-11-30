@@ -127,7 +127,11 @@ class OneTimePasswordPage extends StatelessWidget {
                                 if (canPop ?? false) {
                                   context.goNamed(
                                     PAGES.resetPassword.screenName,
-                                    extra: {'email': email ?? ''},
+                                    extra: {
+                                      'email': email,
+                                      'user': user,
+                                      'canPop': canPop,
+                                    },
                                   );
                                 } else {
                                   Navigator.of(context).popUntil(

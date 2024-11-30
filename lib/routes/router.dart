@@ -76,6 +76,10 @@ class AppRouter {
                       child: ResetPasswordPage(
                         email: ((state.extra ?? Object)
                             as Map<String, dynamic>)['email'] as String,
+                        user: ((state.extra ?? Object)
+                            as Map<String, dynamic>)['user'] as User?,
+                        canPop: ((state.extra ?? Object)
+                            as Map<String, dynamic>)['canPop'] as bool?,
                       ),
                     ),
                     routes: [
@@ -84,7 +88,14 @@ class AppRouter {
                         name: PAGES.passwordSuccess.screenName,
                         builder: (context, state) => BlocProvider(
                           create: (context) => PasswordSuccessCubit(),
-                          child: const PasswordSuccessPage(),
+                          child: PasswordSuccessPage(
+                            user: ((state.extra ?? Object)
+                                as Map<String, dynamic>)['user'] as User?,
+                            email: ((state.extra ?? Object)
+                                as Map<String, dynamic>)['email'] as String,
+                            canPop: ((state.extra ?? Object)
+                                as Map<String, dynamic>)['canPop'] as bool?,
+                          ),
                         ),
                       ),
                     ],
