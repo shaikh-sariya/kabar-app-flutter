@@ -44,6 +44,14 @@ class AppRouter {
               create: (context) => RegisterCubit(),
               child: const RegisterPage(),
             ),
+          ),
+          GoRoute(
+            path: PAGES.recoveryOption.screenPath,
+            name: PAGES.recoveryOption.screenName,
+            builder: (context, state) => BlocProvider(
+              create: (context) => RecoveryOptionCubit(),
+              child: const RecoveryOptionPage(),
+            ),
             routes: [
               GoRoute(
                 path: PAGES.oneTimePassword.screenPath,
@@ -55,32 +63,24 @@ class AppRouter {
                         as Map<String, dynamic>)['user'] as User,
                   ),
                 ),
-              ),
-            ],
-          ),
-          GoRoute(
-            path: PAGES.recoveryOption.screenPath,
-            name: PAGES.recoveryOption.screenName,
-            builder: (context, state) => BlocProvider(
-              create: (context) => RecoveryOptionCubit(),
-              child: const RecoveryOptionPage(),
-            ),
-            routes: [
-              GoRoute(
-                path: PAGES.resetPassword.screenPath,
-                name: PAGES.resetPassword.screenName,
-                builder: (context, state) => BlocProvider(
-                  create: (context) => ResetPasswordCubit(),
-                  child: const ResetPasswordPage(),
-                ),
                 routes: [
                   GoRoute(
-                    path: PAGES.passwordSuccess.screenPath,
-                    name: PAGES.passwordSuccess.screenName,
+                    path: PAGES.resetPassword.screenPath,
+                    name: PAGES.resetPassword.screenName,
                     builder: (context, state) => BlocProvider(
-                      create: (context) => PasswordSuccessCubit(),
-                      child: const PasswordSuccessPage(),
+                      create: (context) => ResetPasswordCubit(),
+                      child: const ResetPasswordPage(),
                     ),
+                    routes: [
+                      GoRoute(
+                        path: PAGES.passwordSuccess.screenPath,
+                        name: PAGES.passwordSuccess.screenName,
+                        builder: (context, state) => BlocProvider(
+                          create: (context) => PasswordSuccessCubit(),
+                          child: const PasswordSuccessPage(),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

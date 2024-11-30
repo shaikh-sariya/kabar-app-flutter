@@ -131,7 +131,7 @@ class AppWidgets {
           valueListenable: obscureText ?? ValueNotifier<bool>(false),
           builder: (context, value, child) {
             return Padding(
-              padding: const EdgeInsets.only(top: 16),
+              padding: const EdgeInsets.only(top: 8),
               child: TextFormField(
                 controller: controller,
                 inputFormatters: inputFormatters,
@@ -232,6 +232,7 @@ class AppWidgets {
     switch (type) {
       case ButtonType.login:
         title = AppStrings.login;
+        pressedTitle = AppStrings.loggingIn;
       case ButtonType.register:
         title = AppStrings.register;
         pressedTitle = AppStrings.registering;
@@ -270,6 +271,7 @@ class AppWidgets {
       customSnackBar({
     required BuildContext context,
     required String content,
+    bool? success,
   }) {
     final colorScheme = context.theme.colorScheme;
 
@@ -284,7 +286,8 @@ class AppWidgets {
             ScaffoldMessenger.of(context).clearSnackBars();
           },
         ),
-        backgroundColor: AppColors.mandatory,
+        backgroundColor:
+            success ?? false ? AppColors.success : AppColors.mandatory,
         dismissDirection: DismissDirection.down,
         elevation: 12,
       ),

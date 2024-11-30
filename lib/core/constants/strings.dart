@@ -50,6 +50,8 @@ class AppStrings {
 
   static String get login => 'Login';
 
+  static String get loggingIn => 'Logging In';
+
   static String get orContinueWith => 'or continue with';
 
   static String get facebook => 'Facebook';
@@ -127,4 +129,6 @@ class AppStrings {
   static String get resendMessage => 'Resend code in ';
 
   static String get resend => 'Resend';
+
+  static String get verificationMessage => 'Verification OTP sent on mail';
 }

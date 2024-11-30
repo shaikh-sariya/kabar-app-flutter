@@ -20,9 +20,8 @@ class LoginPage extends StatelessWidget {
                 children: [
                   Text(
                     AppStrings.hello,
-                    style: textTheme.displayMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                    ),
+                    style: textTheme.displayMedium
+                        ?.copyWith(fontWeight: FontWeight.w800),
                   ),
                   Text(
                     AppStrings.again,
@@ -40,8 +39,8 @@ class LoginPage extends StatelessWidget {
                   ),
                   AppWidgets.customTextField(
                     context: context,
-                    type: TextFieldType.username,
-                    controller: cubit.usernameController,
+                    type: TextFieldType.email,
+                    controller: cubit.emailController,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16),
@@ -88,9 +87,8 @@ class LoginPage extends StatelessWidget {
                         },
                         child: Text(
                           AppStrings.forgotPassword,
-                          style: textTheme.labelLarge?.copyWith(
-                            color: AppColors.primary,
-                          ),
+                          style: textTheme.labelLarge
+                              ?.copyWith(color: AppColors.primary),
                         ),
                       ),
                     ],
@@ -102,10 +100,63 @@ class LoginPage extends StatelessWidget {
                         Expanded(
                           child: AppWidgets.customPrimaryButton(
                             type: ButtonType.login,
-                            onPressed: () {
-                              cubit.formKey.currentState!.validate();
-                            },
                             textTheme: textTheme,
+                            valueListenable: cubit.loggingIn,
+                            onPressed: () async {
+                              final response = await cubit.login();
+                              if ((response ?? '').isNotEmpty) {
+                                final capitalizedResponse = (response ?? '')[0]
+                                        .toUpperCase() +
+                                    (response ?? '').substring(1).toLowerCase();
+                                final success =
+                                    (response ?? '') == 'email_not_confirmed';
+                                if (context.mounted && !success) {
+                                  AppWidgets.customSnackBar(
+                                    context: context,
+                                    content: capitalizedResponse,
+                                  );
+                                }
+                                if (success) {
+                                  final response = await cubit.sendOTP();
+                                  if ((response ?? '').isNotEmpty) {
+                                    final capitalizedResponse =
+                                        (response ?? '')[0].toUpperCase() +
+                                            (response ?? '')
+                                                .substring(1)
+                                                .toLowerCase();
+                                    if (context.mounted) {
+                                      AppWidgets.customSnackBar(
+                                        context: context,
+                                        content: capitalizedResponse,
+                                      );
+                                    }
+                                  } else {
+                                    if (context.mounted) {
+                                      AppWidgets.customSnackBar(
+                                        context: context,
+                                        content: AppStrings.verificationMessage,
+                                        success: success,
+                                      );
+                                      await context.pushNamed(
+                                        PAGES.oneTimePassword.screenName,
+                                        extra: {
+                                          'user': User(
+                                            id: 'id',
+                                            appMetadata: {},
+                                            userMetadata: {},
+                                            aud: 'aud',
+                                            createdAt: 'createdAt',
+                                            email: cubit.emailController.text,
+                                          ),
+                                        },
+                                      );
+                                    }
+                                  }
+                                }
+                              } else {
+                                // TODO(navigation): Navigate to HomePage.
+                              }
+                            },
                           ),
                         ),
                       ],

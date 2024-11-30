@@ -118,7 +118,12 @@ class RegisterPage extends StatelessWidget {
                                   }
                                 } else {
                                   if (context.mounted) {
-                                    context.goNamed(
+                                    AppWidgets.customSnackBar(
+                                      context: context,
+                                      content: AppStrings.verificationMessage,
+                                      success: true,
+                                    );
+                                    await context.pushNamed(
                                       PAGES.oneTimePassword.screenName,
                                       extra: {'user': cubit.user},
                                     );

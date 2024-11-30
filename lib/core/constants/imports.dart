@@ -23,6 +23,8 @@ export 'package:news_app/core/enums/text_field.dart';
 export 'package:news_app/core/extensions/context_extension.dart';
 export 'package:news_app/core/init/initializer.dart';
 export 'package:news_app/core/theme/theme.dart';
+export 'package:news_app/modules/authentication/forgot_password/one_time_password/presentation/cubit/one_time_password_cubit.dart';
+export 'package:news_app/modules/authentication/forgot_password/one_time_password/presentation/pages/one_time_password.dart';
 export 'package:news_app/modules/authentication/forgot_password/password_success/presentation/cubit/password_success_cubit.dart';
 export 'package:news_app/modules/authentication/forgot_password/password_success/presentation/pages/password_success.dart';
 export 'package:news_app/modules/authentication/forgot_password/recovery_option/presentation/cubit/recovery_option_cubit.dart';
@@ -31,8 +33,6 @@ export 'package:news_app/modules/authentication/forgot_password/reset_password/p
 export 'package:news_app/modules/authentication/forgot_password/reset_password/presentation/pages/reset_password.dart';
 export 'package:news_app/modules/authentication/login/presentation/cubits/login_cubit.dart';
 export 'package:news_app/modules/authentication/login/presentation/pages/login.dart';
-export 'package:news_app/modules/authentication/one_time_password/presentation/cubit/one_time_password_cubit.dart';
-export 'package:news_app/modules/authentication/one_time_password/presentation/pages/one_time_password.dart';
 export 'package:news_app/modules/authentication/register/presentation/cubit/register_cubit.dart';
 export 'package:news_app/modules/authentication/register/presentation/pages/register_page.dart';
 export 'package:news_app/modules/onboarding/introduction/presentation/cubits/introduction_cubit.dart';
