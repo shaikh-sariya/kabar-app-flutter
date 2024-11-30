@@ -21,6 +21,7 @@ class AppWidgets {
         text = AppStrings.name;
         labelText = AppStrings.enterName;
         inputFormatters = [
+          FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]')),
           NameInputFormatter(),
           FirstLetterUppercaseFormatter(),
         ];
@@ -130,7 +131,7 @@ class AppWidgets {
           valueListenable: obscureText ?? ValueNotifier<bool>(false),
           builder: (context, value, child) {
             return Padding(
-              padding: EdgeInsets.only(top: 0.01.sh),
+              padding: const EdgeInsets.only(top: 16),
               child: TextFormField(
                 controller: controller,
                 inputFormatters: inputFormatters,
@@ -223,36 +224,43 @@ class AppWidgets {
     required ButtonType type,
     required void Function()? onPressed,
     required TextTheme textTheme,
+    ValueNotifier<bool>? valueListenable,
   }) {
     String title;
+    String? pressedTitle;
 
     switch (type) {
       case ButtonType.login:
         title = AppStrings.login;
       case ButtonType.register:
         title = AppStrings.register;
+        pressedTitle = AppStrings.registering;
       case ButtonType.submit:
         title = AppStrings.submit;
+        pressedTitle = AppStrings.submitting;
       case ButtonType.goToLogin:
         title = AppStrings.goToLogin;
     }
-    return FilledButton(
-      onPressed: onPressed,
-      style: FilledButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 13,
+    return ValueListenableBuilder(
+      valueListenable: valueListenable ?? ValueNotifier<bool>(false),
+      builder: (context, value, child) => FilledButton(
+        onPressed: value ? null : onPressed,
+        style: FilledButton.styleFrom(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 13,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+          backgroundColor: AppColors.primary,
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
-        ),
-        backgroundColor: AppColors.primary,
-      ),
-      child: Text(
-        title,
-        style: textTheme.labelLarge?.copyWith(
-          color: AppColors.white,
-          fontWeight: FontWeight.bold,
+        child: Text(
+          value ? (pressedTitle ?? '') : title,
+          style: textTheme.labelLarge?.copyWith(
+            color: value ? AppColors.body : AppColors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
@@ -279,6 +287,81 @@ class AppWidgets {
         backgroundColor: AppColors.mandatory,
         dismissDirection: DismissDirection.down,
         elevation: 12,
+      ),
+    );
+  }
+
+  static Widget customOTPFields({
+    required List<TextEditingController> controllers,
+    required List<FocusNode> focusNodes,
+    required BuildContext context,
+  }) {
+    void onChanged(int index, String value) {
+      if (value.isNotEmpty && value.length == 1) {
+        if (index < controllers.length - 1) {
+          focusNodes[index + 1].requestFocus();
+        } else {
+          FocusScope.of(context).unfocus();
+        }
+      } else if (value.isEmpty) {
+        for (var i = controllers.length - 1; i >= 0; i--) {
+          if (controllers[i].text.isNotEmpty) {
+            focusNodes[i].requestFocus();
+            return;
+          }
+        }
+
+        focusNodes[0].requestFocus();
+      }
+    }
+
+    return SizedBox(
+      height: 60,
+      child: GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 6,
+          mainAxisExtent: 60,
+          crossAxisSpacing: 8,
+        ),
+        itemCount: controllers.length,
+        itemBuilder: (context, index) => TextFormField(
+          controller: controllers[index],
+          focusNode: focusNodes[index],
+          textAlign: TextAlign.center,
+          keyboardType: TextInputType.number,
+          maxLength: 1,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          decoration: InputDecoration(
+            counterText: '',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(color: AppColors.body),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(6),
+              borderSide: const BorderSide(color: AppColors.mandatory),
+            ),
+            hintText: '-',
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+          ),
+          onChanged: (value) => onChanged(index, value),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return '';
+            }
+            return null;
+          },
+          onTap: () {
+            for (var i = 0; i < controllers.length; i++) {
+              if (controllers[i].text.isEmpty) {
+                focusNodes[i].requestFocus();
+                return;
+              }
+            }
+            focusNodes[controllers.length - 1].requestFocus();
+          },
+        ),
       ),
     );
   }

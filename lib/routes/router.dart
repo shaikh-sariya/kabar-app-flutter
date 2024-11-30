@@ -44,6 +44,19 @@ class AppRouter {
               create: (context) => RegisterCubit(),
               child: const RegisterPage(),
             ),
+            routes: [
+              GoRoute(
+                path: PAGES.oneTimePassword.screenPath,
+                name: PAGES.oneTimePassword.screenName,
+                builder: (context, state) => BlocProvider(
+                  create: (context) => OneTimePasswordCubit(),
+                  child: OneTimePasswordPage(
+                    user: ((state.extra ?? Object)
+                        as Map<String, dynamic>)['user'] as User,
+                  ),
+                ),
+              ),
+            ],
           ),
           GoRoute(
             path: PAGES.recoveryOption.screenPath,

@@ -11,6 +11,8 @@ extension AppPageExtension on PAGES {
         return '/login';
       case PAGES.register:
         return 'register';
+      case PAGES.oneTimePassword:
+        return 'one-time-password';
       case PAGES.recoveryOption:
         return 'recovery-option';
       case PAGES.resetPassword:
@@ -30,6 +32,8 @@ extension AppPageExtension on PAGES {
         return 'LOGIN';
       case PAGES.register:
         return 'REGISTER';
+      case PAGES.oneTimePassword:
+        return 'ONE TIME PASSWORD';
       case PAGES.recoveryOption:
         return 'RECOVERY OPTION';
       case PAGES.resetPassword:
@@ -49,6 +53,8 @@ extension AppPageExtension on PAGES {
         return 'Login';
       case PAGES.register:
         return 'Register';
+      case PAGES.oneTimePassword:
+        return 'One Time Password';
       case PAGES.recoveryOption:
         return 'Recovery Option';
       case PAGES.resetPassword:

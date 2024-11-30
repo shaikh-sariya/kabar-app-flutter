@@ -60,6 +60,8 @@ class AppStrings {
 
   static String get register => 'Register';
 
+  static String get registering => 'Registering';
+
   static String get search => 'search';
 
   static String get trending => 'Trending';
@@ -78,6 +80,8 @@ class AppStrings {
       '''Don’t worry! it happens. Please enter the username associated with your account.''';
 
   static String get submit => 'Submit';
+
+  static String get submitting => 'Submitting';
 
   static String get reset => 'Reset';
 
@@ -115,4 +119,12 @@ class AppStrings {
       '''Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.''';
 
   static String get close => 'CLOSE';
+
+  static String get otpTitle => 'OTP Verification';
+
+  static String get otpMessage => 'Enter the code you have received on ';
+
+  static String get resendMessage => 'Resend code in ';
+
+  static String get resend => 'Resend';
 }

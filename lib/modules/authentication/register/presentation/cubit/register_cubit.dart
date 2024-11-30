@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:news_app/core/constants/imports.dart';
 
 part 'register_state.dart';
@@ -16,13 +14,15 @@ class RegisterCubit extends Cubit<RegisterState> {
   final obscureConfirmText = ValueNotifier<bool>(true);
 
   final formKey = GlobalKey<FormState>();
+  final registeringUser = ValueNotifier<bool>(false);
 
   final supabase = Supabase.instance.client;
-  BuildContext? context;
+  User? user;
 
   Future<String?> registerUser() async {
     try {
-      await supabase.auth.signUp(
+      registeringUser.value = true;
+      final response = await supabase.auth.signUp(
         email: emailController.text,
         password: passwordController.text,
         data: {
@@ -30,19 +30,11 @@ class RegisterCubit extends Cubit<RegisterState> {
           'username': usernameController.text,
         },
       );
+      user = response.user;
       return null;
     } on AuthException catch (e) {
+      registeringUser.value = false;
       return e.message;
     }
-  }
-
-  Future<void> verifyOTP({required String token}) async {
-    final response = await supabase.auth.verifyOTP(
-      type: OtpType.email,
-      token: token,
-      email: emailController.text,
-    );
-    log('$response');
-    log('${response.runtimeType}');
   }
 }

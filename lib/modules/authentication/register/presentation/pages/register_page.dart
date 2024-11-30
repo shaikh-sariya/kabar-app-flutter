@@ -99,6 +99,8 @@ class RegisterPage extends StatelessWidget {
                         Expanded(
                           child: AppWidgets.customPrimaryButton(
                             type: ButtonType.register,
+                            valueListenable: cubit.registeringUser,
+                            textTheme: textTheme,
                             onPressed: () async {
                               if (cubit.formKey.currentState!.validate()) {
                                 final response = await cubit.registerUser();
@@ -114,10 +116,16 @@ class RegisterPage extends StatelessWidget {
                                       content: capitalizedResponse,
                                     );
                                   }
+                                } else {
+                                  if (context.mounted) {
+                                    context.goNamed(
+                                      PAGES.oneTimePassword.screenName,
+                                      extra: {'user': cubit.user},
+                                    );
+                                  }
                                 }
                               }
                             },
-                            textTheme: textTheme,
                           ),
                         ),
                       ],

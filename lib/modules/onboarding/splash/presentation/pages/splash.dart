@@ -21,7 +21,7 @@ class _SplashPageState extends State<SplashPage>
       );
     cubit.animation = Tween<double>(begin: 0, end: 1).animate(cubit.controller);
     cubit.controller.forward().then((_) {
-      context.goNamed(PAGES.introduction.screenName);
+      context.pushReplacementNamed(PAGES.introduction.screenName);
     });
   }
 

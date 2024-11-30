@@ -82,7 +82,9 @@ class _IntroductionPageState extends State<IntroductionPage> {
                                   curve: Curves.easeIn,
                                 );
                               } else {
-                                context.goNamed(PAGES.login.screenName);
+                                context.pushReplacementNamed(
+                                  PAGES.login.screenName,
+                                );
                               }
                             },
                             style: FilledButton.styleFrom(
