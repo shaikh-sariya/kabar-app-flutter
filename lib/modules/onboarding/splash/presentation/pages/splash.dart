@@ -10,6 +10,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
   late final SplashCubit cubit;
+  final prefs = SharedPreferencesAsync();
 
   @override
   void initState() {
@@ -20,9 +21,19 @@ class _SplashPageState extends State<SplashPage>
         duration: const Duration(milliseconds: 1500),
       );
     cubit.animation = Tween<double>(begin: 0, end: 1).animate(cubit.controller);
-    cubit.controller.forward().then((_) {
-      context.pushReplacementNamed(PAGES.introduction.screenName);
+  }
+
+  @override
+  Future<void> didChangeDependencies() async {
+    final welcomeCompleted = (await prefs.getBool('welcomeCompleted')) ?? false;
+    await cubit.controller.forward().then((_) {
+      if (welcomeCompleted) {
+        context.pushReplacementNamed(PAGES.login.screenName);
+      } else {
+        context.pushReplacementNamed(PAGES.introduction.screenName);
+      }
     });
+    super.didChangeDependencies();
   }
 
   @override

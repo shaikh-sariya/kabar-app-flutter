@@ -9,6 +9,11 @@ class IntroductionPage extends StatefulWidget {
 
 class _IntroductionPageState extends State<IntroductionPage> {
   late final IntroductionCubit cubit;
+  final _prefs = SharedPreferencesWithCache.create(
+    cacheOptions: const SharedPreferencesWithCacheOptions(
+      allowList: <String>{'welcomeCompleted'},
+    ),
+  );
 
   @override
   void didChangeDependencies() {
@@ -73,18 +78,22 @@ class _IntroductionPageState extends State<IntroductionPage> {
                         valueListenable: cubit.currentPage,
                         builder: (context, value, child) {
                           return FilledButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (cubit.currentPage.value != 2) {
                                 cubit.currentPage.value += 1;
-                                cubit.controller?.animateToPage(
+                                await cubit.controller?.animateToPage(
                                   cubit.currentPage.value,
                                   duration: const Duration(milliseconds: 300),
                                   curve: Curves.easeIn,
                                 );
                               } else {
-                                context.pushReplacementNamed(
-                                  PAGES.login.screenName,
-                                );
+                                final prefs = await _prefs;
+                                await prefs.setBool('welcomeCompleted', true);
+                                if (context.mounted) {
+                                  context.pushReplacementNamed(
+                                    PAGES.login.screenName,
+                                  );
+                                }
                               }
                             },
                             style: FilledButton.styleFrom(

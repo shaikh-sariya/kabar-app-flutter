@@ -45,4 +45,5 @@ export 'package:news_app/my_app.dart';
 export 'package:news_app/routes/route_observer.dart';
 export 'package:news_app/routes/router.dart';
 export 'package:news_app/routes/routes.dart';
+export 'package:shared_preferences/shared_preferences.dart';
 export 'package:supabase_flutter/supabase_flutter.dart';
